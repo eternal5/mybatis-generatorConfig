@@ -4,17 +4,19 @@
         "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
 
 <generatorConfiguration>
+    <context id="MysqlContext" targetRuntime="MyBatis3Simple" defaultModelType="flat">
+        <property name="beginningDelimiter" value="`"/>
+        <property name="endingDelimiter" value="`"/>
 
-    <context id="mysqlgenerator" targetRuntime="MyBatis3">
-        <!--不生成注释-->
-        <commentGenerator>
-            <property name="suppressAllComments" value="true" />
-        </commentGenerator>
-        <!-- 配置数据库连接 -->
+        <plugin type="tk.mybatis.mapper.generator.MapperPlugin">
+            <property name="mappers" value="com.mybatis.util.MyMapper"/>
+        </plugin>
+
         <jdbcConnection driverClass="com.mysql.jdbc.Driver"
                         connectionURL="jdbc:mysql://localhost:3306/video?useSSL=false"
                         userId="root"
-                        password="mysql" />
+                        password="mysql">
+        </jdbcConnection>
 
         <!-- 对应生成的pojo所在包 -->
         <javaModelGenerator targetPackage="com.mybatis.pojo" targetProject="src/main/java"/>
@@ -27,8 +29,7 @@
                              type="XMLMAPPER"/>
 
 
-        <table tableName="users"></table>
+        <table tableName="bgm"></table>
 
     </context>
-
 </generatorConfiguration>
